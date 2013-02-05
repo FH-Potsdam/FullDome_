@@ -88,24 +88,8 @@ import javax.media.opengl.glu.GLU;
         background(0,0,20);
 
 
-       float lightX = mouseP.x;
-       float lightY = mouseP.y;
-       float lightZ = mouseP.z;
 
-
-
-       gl.glEnable(gl.GL_FOG);
-       gl.glFogi(gl.GL_FOG_MODE, gl.GL_LINEAR); // Note the 'i' after glFog - the GL_LINEAR constant is an integer.
-       gl.glFogf(gl.GL_FOG_START, 350);
-       gl.glFogf(gl.GL_FOG_END, 1000.f);
-
-
-       hint(ENABLE_DEPTH_SORT);
-       hint(ENABLE_DEPTH_MASK);
-       hint(ENABLE_OPENGL_2X_SMOOTH);
-
-
-       pgl.pushMatrix();
+      pgl.pushMatrix();
       
       if(!pauseAnimation){
       if(moveUp)cubePos*=1.005;
@@ -126,9 +110,7 @@ import javax.media.opengl.glu.GLU;
 
        pgl.popMatrix();
 
-       hint(DISABLE_DEPTH_SORT);
-
-
+    
        pgl.pushMatrix();
 
        pgl.translate(globalX, 0, globalZ);
@@ -183,6 +165,15 @@ import javax.media.opengl.glu.GLU;
        // if we need to change the box model verticies we should do this here and not in drawscene
 
        pgl.beginGL();
+
+
+       //let's use some fog for a better 3d feeling
+       gl.glEnable(gl.GL_FOG);
+       gl.glFogi(gl.GL_FOG_MODE, gl.GL_LINEAR); 
+       gl.glFogf(gl.GL_FOG_START, 350);
+       gl.glFogf(gl.GL_FOG_END, 1000.f);
+
+            
        cubeMapUtils.drawCubeMap();
        pgl.endGL();
 
